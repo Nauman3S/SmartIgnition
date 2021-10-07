@@ -79,12 +79,6 @@ You should have latest Platform.io installed in your VSCode
 
 ![ESP32 Pinout](Docs/esp32Pinout.jpg)
 
-- Power Button is Connected to D10 of Arduino
-- Bluetooth Button is Connected to D6 of Arduino
-- Amplifier LRC is Connected to D9 of Arduino
-- Amplifier SCK is Connected to D8 of Arduino
-- Amplifier DATA is Connected to D7 of Arduino
-
 
 
 

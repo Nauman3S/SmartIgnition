@@ -8,7 +8,6 @@ void printDec(byte *buffer, byte bufferSize);
 void readNUID();
 String NUIDV = "";
 
-
 #define SIZE_BUFFER 18
 #define MAX_SIZE_BLOCK 16
 
@@ -147,22 +146,28 @@ void printDec(byte *buffer, byte bufferSize)
 
 void readNUID()
 {
-    NUIDV="";
+    NUIDV = "";
     for (byte i = 0; i < 4; i++)
     {
         nuidPICC[i] = mfrc522.uid.uidByte[i];
         NUIDV += String(nuidPICC[i]);
     }
 
-    // Serial.println(F("The NUID tag is:"));
-    // Serial.print(F("In hex: "));
-    // printHex(mfrc522.uid.uidByte, mfrc522.uid.size);
-    // Serial.println();
-    // Serial.print(F("In dec: "));
-    // printDec(mfrc522.uid.uidByte, mfrc522.uid.size);
-    // Serial.println();
-    beepNow();
+    beepNow(2);
     Serial.print(F("NUID Detected: "));
     Serial.println(NUIDV);
     Serial.println();
+
+    if (checkAccess(NUIDV))
+    {
+        redArmedLed = JLed(LED_R).Off().DelayBefore(500);   //red led off
+        greenLed = JLed(LED_BUILTIN).On().DelayBefore(500); //green led on
+        lastCardAllowed=true;
+    }
+    else
+    {
+        redArmedLed = JLed(LED_R).Blink(1000, 1000).Repeat(1);
+        beepNow(1);
+        redArmedLed = JLed(LED_R).Blink(1000, 1000).Forever();
+    }
 }

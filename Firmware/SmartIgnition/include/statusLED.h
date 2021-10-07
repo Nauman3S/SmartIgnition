@@ -9,6 +9,7 @@
 auto led = JLed(LED_BUILTIN).Blink(1000, 1000).Forever();
 auto btLed = JLed(BLUETOOTH_CONNECTIVITY).Blink(1000, 1000).Forever();
 auto redArmedLed = JLed(LED_R).Blink(1000, 1000).Forever();
+auto greenLed = JLed(LED_G).Off().DelayBefore(10);
 
 
 void ledState(uint8_t v){
@@ -27,4 +28,5 @@ void loopLEDHandler() {
   led.Update();
   btLed.Update();
   redArmedLed.Update();
+  greenLed.Update();
 }

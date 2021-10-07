@@ -3,9 +3,10 @@
 #include "statusLED.h"
 #include "neoTime.h"
 #include "beepHandler.h"
+#include "accessControlList.h"
 #include "mfrcHandler.h"
 #include "activationBtnHandler.h"
-#include "accessControlList.h"
+
 
 Neotimer StandardTimer(1000);
 #define LED 2
@@ -17,7 +18,9 @@ void setup()
   ledState(ACTIVE_MODE);
   setupRFID();
   setupAccessControlList();
+  
   addAllowedNUID("3219320124");
+
   setupBtn();
   setupBeeper();
 

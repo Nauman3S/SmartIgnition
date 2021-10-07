@@ -5,9 +5,8 @@ uint8_t ingitionState = 0;
 const byte
     BUTTON_PIN(RELAY_ACTIVATION_BUTTON); // connect a button switch from this pin to ground
 
-Button myBtn(BUTTON_PIN, 100); // define the button
-const unsigned long LONG_PRESS = 200;
-unsigned long prevMils = 0;
+Button myBtn(BUTTON_PIN, 100, true); // define the button
+const unsigned long LONG_PRESS = 300;
 
 void setupBtn()
 {
@@ -18,15 +17,13 @@ void pollActivationButton()
 {
 
     myBtn.read(); // read the button
-    unsigned long curMils = millis();
-    if (myBtn.pressedFor(LONG_PRESS))
-    {
-        if (curMils - prevMils > 1000)
-        {
-            prevMils=curMils;
 
+    if (myBtn.pressedFor(500))
+    {
+        if (lastCardAllowed == true)
+        {
             Serial.println("Pressed ");
-            beepNow();
+            beepNow(2);
             if (ingitionState == 0)
             {
                 digitalWrite(LR_1, HIGH);

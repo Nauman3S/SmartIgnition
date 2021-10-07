@@ -1,11 +1,15 @@
 #include <jled.h>
 
-#define LED_BUILTIN 2
+
+
 #define ACTIVE_MODE 0
 #define IDLE_MODE 1
 #define AP_MODE 2
 // blink internal LED every second; 1 second on, 1 second off.
 auto led = JLed(LED_BUILTIN).Blink(1000, 1000).Forever();
+auto btLed = JLed(BLUETOOTH_CONNECTIVITY).Blink(1000, 1000).Forever();
+auto redArmedLed = JLed(LED_R).Blink(1000, 1000).Forever();
+
 
 void ledState(uint8_t v){
     if(v==ACTIVE_MODE){//activve
@@ -21,4 +25,6 @@ void ledState(uint8_t v){
 
 void loopLEDHandler() {
   led.Update();
+  btLed.Update();
+  redArmedLed.Update();
 }
